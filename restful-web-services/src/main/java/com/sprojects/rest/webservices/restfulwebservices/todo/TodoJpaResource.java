@@ -32,7 +32,11 @@ public class TodoJpaResource {
 	
 	@GetMapping("/jpa/users/{username}/todos/{id}")
 	public Todo getAllTodos(@PathVariable String username, @PathVariable long id) {
-		return todoJpaRepository.findById(id).get();
+		if(id == -1 || id == 0) {
+			return null;
+		} else {
+			return todoJpaRepository.findById(id).get();
+		}
 	}
 	
 	@DeleteMapping("/jpa/users/{username}/todos/{id}")
